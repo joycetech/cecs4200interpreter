@@ -1,0 +1,114 @@
+//1.all constraints
+#include <stdio.h>
+int main()
+{
+
+ int number;
+
+    int integerType;
+    float floatType;
+    double doubleType;
+    char charType;
+
+
+    // printf() dislpays the formatted output 
+    printf("Enter an integer: ");  
+    
+    // scanf() reads the formatted input and stores them
+    scanf("%d", &number);  
+    
+    // printf() displays the formatted output
+    printf("You entered: %d", number);
+
+
+
+
+    // Sizeof operator is used to evaluate the size of a variable
+    printf("Size of int: %ld bytes\n",sizeof(integerType));
+    printf("Size of float: %ld bytes\n",sizeof(floatType));
+    printf("Size of double: %ld bytes\n",sizeof(doubleType));
+    printf("Size of char: %ld byte\n",sizeof(charType));
+
+    return 0;
+}
+
+//*******************************************
+//2.mathematical operations with conditioning
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    double a, b, c, determinant, root1,root2, realPart, imaginaryPart;
+
+    printf("Enter coefficients a, b and c: ");
+    scanf("%lf %lf %lf",&a, &b, &c);
+
+    determinant = b*b-4*a*c;
+
+    // condition for real and different roots
+    if (determinant > 0)
+    {
+    // sqrt() function returns square root
+        root1 = (-b+sqrt(determinant))/(2*a);
+        root2 = (-b-sqrt(determinant))/(2*a);
+
+        printf("root1 = %.2lf and root2 = %.2lf",root1 , root2);
+    }
+
+    //condition for real and equal roots
+    else if (determinant == 0)
+    {
+        root1 = root2 = -b/(2*a);
+
+        printf("root1 = root2 = %.2lf;", root1);
+    }
+
+    // if roots are not real 
+    else
+    {
+        realPart = -b/(2*a);
+        imaginaryPart = sqrt(-determinant)/(2*a);
+        printf("root1 = %.2lf+%.2lfi and root2 = %.2f-%.2fi", realPart, imaginaryPart, realPart, imaginaryPart);
+    }
+
+    return 0;
+}   
+
+//****************************
+//3.allocation conditioning
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct course
+{
+   int marks;
+   char subject[30];
+};
+
+int main()
+{
+   struct course *ptr;
+   int i, noOfRecords;
+   printf("Enter number of records: ");
+   scanf("%d", &noOfRecords);
+
+   // Allocates the memory for noOfRecords structures with pointer ptr pointing to the base address.
+   ptr = (struct course*) malloc (noOfRecords * sizeof(struct course));
+
+   for(i = 0; i < noOfRecords; ++i)
+   {
+       printf("Enter name of the subject and marks respectively:\n");
+       scanf("%s %d", &(ptr+i)->subject, &(ptr+i)->marks);
+   }
+
+   printf("Displaying Information:\n");
+
+   for(i = 0; i < noOfRecords ; ++i)
+       printf("%s\t%d\n", (ptr+i)->subject, (ptr+i)->marks);
+
+   return 0;
+}
+
